@@ -1,0 +1,5 @@
+model/glove.6B.300d.txt
+
+# Python cache
+__pycache__/
+*.py[cod]

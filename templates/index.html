@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fake News Detector</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h2>📰 Fake News Classifier</h2>
+        <form method="post" onsubmit="showLoading()">
+          <textarea
+            name="news_text"
+            placeholder="Paste a news article here..."
+            required
+          ></textarea>
+          <button type="submit">🔍 Classify</button>
+        </form>
+
+        <div id="loading" class="loader" style="display: none"></div>
+
+        {% if prediction %}
+        <div class="result fade-in">
+          <h3>
+            Prediction:
+            <span class="{{ 'fake' if prediction == 'Fake' else 'real' }}"
+              >{{ prediction }}</span
+            >
+          </h3>
+          <p>Confidence: {{ confidence }}%</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <script>
+      function showLoading() {
+        document.getElementById("loading").style.display = "block";
+        const result = document.querySelector(".result");
+        if (result) result.style.display = "none";
+      }
+    </script>
+  </body>
+</html>
